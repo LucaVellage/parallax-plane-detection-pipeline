@@ -3,7 +3,11 @@ Script for initial authentication and initialisation of Google Earth Engine
 """
 
 import ee 
-from pipeline.private_config import GEE_PROJECT
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+GEE_PROJECT = os.getenv('GEE_PROJECT')
 
 def gee_auth_init():
 
