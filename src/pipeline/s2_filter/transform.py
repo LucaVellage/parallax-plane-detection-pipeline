@@ -197,7 +197,7 @@ def inspect_blobs(date, tile) -> None:
     # excluding background
     all_blobs = stats[1:, cv2.CC_STAT_AREA]
     kept_blobs = all_blobs[all_blobs <= MAX_OBJECT_SIZE_PX]
-    dropped_areas = all_blobs[all_blobs > MAX_OBJECT_SIZE_PX]
+    dropped_blobs = all_blobs[all_blobs > MAX_OBJECT_SIZE_PX]
 
     print('=' * 40)
     print('Transformation Inspection')
@@ -208,9 +208,9 @@ def inspect_blobs(date, tile) -> None:
     print(f"Pixels added by dilation     : {mask_dilated.sum() - mask.sum()}")
     print(f"Total blobs found            : {len(all_blobs)}")
     print(f"Kept (≤{MAX_OBJECT_SIZE_PX}px)                : {len(kept_blobs)}")
-    print(f"Dropped (>{MAX_OBJECT_SIZE_PX}px)             : {len(dropped_areas)}")
-    if len(dropped_areas) > 0:
-        print(f"Largest dropped          : {dropped_areas.max()} px")
+    print(f"Dropped (>{MAX_OBJECT_SIZE_PX}px)             : {len(dropped_blobs)}")
+    if len(dropped_blobs) > 0:
+        print(f"Largest dropped          : {dropped_blobs.max()} px")
     print(f"Largest kept                 : {kept_blobs.max() if len(kept_blobs) > 0 else 'n/a'} px")
     print(f"Smallest kept                : {kept_blobs.min() if len(kept_blobs) > 0 else 'n/a'} px")
 
@@ -218,12 +218,18 @@ def inspect_blobs(date, tile) -> None:
     # plot blob size distribution
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
-    axes[0].hist(all_blobs, bins=30, color="steelblue", edgecolor="white")
+    bins = np.histogram_bin_edges(all_blobs, bins=30)
+    axes[0].hist(kept_blobs,    bins=bins, color="steelblue", edgecolor="white",
+                 alpha=0.8, label=f"kept (n={len(kept_blobs)})")
+    if len(dropped_blobs) > 0:
+        axes[0].hist(dropped_blobs, bins=bins, color="tomato", edgecolor="white",
+                     alpha=0.8, label=f"dropped (n={len(dropped_blobs)})")
     axes[0].axvline(MAX_OBJECT_SIZE_PX, color="red", linewidth=1.5,
                     linestyle="--", label=f"threshold ({MAX_OBJECT_SIZE_PX}px)")
     axes[0].set_title("Blob size distribution: all blobs")
     axes[0].set_xlabel("Blob size (pixels)")
     axes[0].set_ylabel("Count")
+    axes[0].set_yscale('log')   # log scale makes large outliers visible
     axes[0].legend()
 
     axes[1].hist(kept_blobs, bins=20, color="steelblue", edgecolor="white")
@@ -234,6 +240,7 @@ def inspect_blobs(date, tile) -> None:
     plt.suptitle(f"Detected Blobs in {date}_{tile}", fontsize=12)
     plt.tight_layout()
     plt.show()
+
 
 
 
