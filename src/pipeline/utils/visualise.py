@@ -18,9 +18,8 @@ from pipeline.s4_confirmation.reflectance_check import run_segmentation
 from pipeline.s4_confirmation.displacement_check import _pixel_dist
 
 
-#--------------------
+
 #Step 4: Confirmation
-#--------------------
 
 def _stretch(arr: np.ndarray, lo: float = 2, hi: float = 98) -> np.ndarray:
     """
@@ -270,7 +269,7 @@ def passing_angle_scatter():
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 4))
 
-    # --- Left: full 0-180° range ---
+    # left
     axes[0].hist(failing_angles, bins=36, color='tomato',
                 edgecolor='white', linewidth=0.5, alpha=0.7,
                 label=f'Failed (n={len(failing_angles)})')
@@ -285,7 +284,7 @@ def passing_angle_scatter():
     axes[0].set_xlim(0, 180)
     axes[0].legend()
 
-    # --- Right: zoomed into threshold ---
+    # right: panel with zoom
     axes[1].hist(failing_angles[failing_angles >= 160], bins=20,
                 color='tomato', edgecolor='white', linewidth=0.5, alpha=0.7,
                 label=f'Failed (n={len(failing_angles)})')
@@ -958,7 +957,7 @@ def plot_pipeline_summary() -> None:
                      bar.get_height() + 0.3,
                      str(count), ha='center', va='bottom', fontsize=9)
     axes[0].set_ylabel("Count")
-    axes[0].set_title("Step 4 — candidate pipeline funnel", fontsize=9)
+    axes[0].set_title("Step 4: candidate pipeline steps", fontsize=9)
  
     # --- Panel 2: speed distribution ---
     if not confirmed.empty:
@@ -971,7 +970,7 @@ def plot_pipeline_summary() -> None:
         axes[1].set_xlabel("Speed (km/h)")
         axes[1].set_ylabel("Count")
         axes[1].set_title(
-            f"Speed distribution — confirmed aircraft (n={len(confirmed)})",
+            f"Speed distribution: confirmed aircraft (n={len(confirmed)})",
             fontsize=9
         )
         axes[1].legend(fontsize=8)
@@ -992,7 +991,7 @@ def plot_pipeline_summary() -> None:
         axes[2].set_xlabel("Longitude")
         axes[2].set_ylabel("Latitude")
         axes[2].set_title(
-            f"Confirmed aircraft locations (n={len(confirmed)})",
+            f"Confirmed aircraft locations across all scenes (n={len(confirmed)})",
             fontsize=9
         )
     else:
@@ -1000,7 +999,7 @@ def plot_pipeline_summary() -> None:
                      transform=axes[2].transAxes,
                      ha='center', va='center', fontsize=10, color='grey')
  
-    fig.suptitle("Step 4 — Aircraft confirmation summary",
+    fig.suptitle("Step 4: Aircraft confirmation summary",
                  fontsize=10, fontweight='bold')
  
     # Summary print
