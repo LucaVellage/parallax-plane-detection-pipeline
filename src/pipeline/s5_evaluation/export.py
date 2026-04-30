@@ -12,6 +12,9 @@ import pandas as pd
 
 from pipeline.config import ADSB_ANNOTATIONS_DIR, TILE_CACHE_DIR
 
+import warnings
+warnings.filterwarnings('ignore', category=FutureWarning, module='pipeline.s5_evaluation.export')
+
 
 
 def _prepare_gdf(gdf, image_id):
@@ -73,10 +76,10 @@ def _export_single(gdf, image_id, output_dir):
     n_adsb     = len(gdf[gdf['source'] == 'adsb'])
     n_matched  = len(gdf[gdf['matched'] == True])
 
-    print(f"  {image_id}_eval.geojson")
-    print(f"    pipeline : {n_pipeline}")
-    print(f"    adsb     : {n_adsb}")
-    print(f"    matched  : {n_matched}")
+    #print(f"  {image_id}_eval.geojson")
+    #print(f"    pipeline : {n_pipeline}")
+    #print(f"    adsb     : {n_adsb}")
+    #print(f"    matched  : {n_matched}")
 
     return out_path
 
@@ -100,7 +103,7 @@ def run_export(results, ):
 
     Path(ADSB_ANNOTATIONS_DIR).mkdir(parents=True, exist_ok=True)
 
-    print(f"\n── Exporting {len(results)} scenes to {ADSB_ANNOTATIONS_DIR} ──\n")
+    #print(f"\n── Exporting {len(results)} scenes to {ADSB_ANNOTATIONS_DIR} ──\n")
 
     out_paths = []
     for image_id, gdf in results.items():

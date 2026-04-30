@@ -84,11 +84,11 @@ def _cache_path(image_id):
 def _query_trino(params, hour_partitions):
     """Runs Trino query and returns a DataFrame."""
     query = _build_query(params, hour_partitions)
-    print(f"Connecting to OpenSky Trino...")
-    print(f"Query window: {params['t_query_start']} → {params['t_query_end']}")
-    print(f"Hour partitions: {hour_partitions}")
-    print(f"Bbox: W={params['west']:.4f} E={params['east']:.4f} "
-          f"S={params['south']:.4f} N={params['north']:.4f}")
+    #print(f"Connecting to OpenSky Trino...")
+    #print(f"Query window: {params['t_query_start']} → {params['t_query_end']}")
+    #print(f"Hour partitions: {hour_partitions}")
+    #print(f"Bbox: W={params['west']:.4f} E={params['east']:.4f} "
+    #      f"S={params['south']:.4f} N={params['north']:.4f}")
 
     conn = _get_connection()
     cursor = conn.cursor()

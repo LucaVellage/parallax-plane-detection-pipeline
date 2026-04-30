@@ -28,7 +28,7 @@ def _apply_filters(df, params):
         (df['datetime'] >= params['t_query_start']) &
         (df['datetime'] <= params['t_query_end'])
     ]
-    print(f"After temporal filter:  {len(df):,} / {n0:,} records")
+    #print(f"After temporal filter:  {len(df):,} / {n0:,} records")
 
     # Spatial filter: clips to AOI if smaller than full tile
     df = df[
@@ -37,7 +37,7 @@ def _apply_filters(df, params):
         (df['lat'] >= params['south']) &
         (df['lat'] <= params['north'])
     ]
-    print(f"After spatial filter:   {len(df):,} records")
+    #print(f"After spatial filter:   {len(df):,} records")
 
     # Altitude filter to remove e.g. taxiing aircraft
     df = df[
@@ -47,12 +47,12 @@ def _apply_filters(df, params):
         (df['velocity'].notna()) &
         (df['velocity'] >= MIN_VELO_MS)
     ]
-    print(f"  After ground filter    : {len(df):,} records")
+    #print(f"  After ground filter    : {len(df):,} records")
 
     # Drop NA
     df = df.dropna(subset=['lat', 'lon'])
     df = df.reset_index(drop=True)
-    print(f"After dropna:           {len(df):,} records")
+    #print(f"After dropna:           {len(df):,} records")
 
     return df
 
@@ -111,8 +111,8 @@ def _get_unique_aircraft(df, params):
     )
 
     print(f"  Unique aircraft        : {len(unique)}")
-    print(f"    likely inside bounds : {(~unique['outside_bounds']).sum()}")
-    print(f"    likely outside bounds: {unique['outside_bounds'].sum()}")
+    #print(f"    likely inside bounds : {(~unique['outside_bounds']).sum()}")
+    #print(f"    likely outside bounds: {unique['outside_bounds'].sum()}")
 
     return unique
 
@@ -120,15 +120,15 @@ def _get_unique_aircraft(df, params):
 #public fct
 def run_adsb_filter(df_raw, params):
 
-    print(f"\n── Filtering {params['image_id']} ──")
-    print(f"  Tile scan window:")
-    print(f"    t_top         : {params['t_top']}")
-    print(f"    t_bottom      : {params['t_bottom']}")
-    print(f"    t_query_start : {params['t_query_start']}")
-    print(f"    t_query_end   : {params['t_query_end']}")
-    print(f"  Tile bbox:")
-    print(f"    N={params['north']:.4f}  S={params['south']:.4f}  "
-          f"W={params['west']:.4f}  E={params['east']:.4f}")
+#    print(f"\n── Filtering {params['image_id']} ──")
+#    print(f"  Tile scan window:")
+#    print(f"    t_top         : {params['t_top']}")
+#    print(f"    t_bottom      : {params['t_bottom']}")
+#    print(f"    t_query_start : {params['t_query_start']}")
+#    print(f"    t_query_end   : {params['t_query_end']}")
+#    print(f"  Tile bbox:")
+#    print(f"    N={params['north']:.4f}  S={params['south']:.4f}  "
+#          f"W={params['west']:.4f}  E={params['east']:.4f}")
     
     df_filtered = _apply_filters(df_raw, params)
     unique      = _get_unique_aircraft(df_filtered, params)

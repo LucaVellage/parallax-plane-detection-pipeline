@@ -110,10 +110,10 @@ def run_adsb_match(df_detections, df_adsb, params):
 
     """
     image_id = params['image_id']
-    print(f"\nMatching {image_id}")
-    print(f"Detections : {len(df_detections)}")
-    print(f"ADS-B      : {len(df_adsb)}")
-    print(f"Threshold  : {ADSB_MATCH_THRESHOLD_M}m")
+    #print(f"\nMatching {image_id}")
+    #print(f"Detections : {len(df_detections)}")
+    #print(f"ADS-B      : {len(df_adsb)}")
+    #print(f"Threshold  : {ADSB_MATCH_THRESHOLD_M}m")
 
     # matching detections with ADS-B
     det_rows = _build_detection_rows(df_detections, df_adsb, ADSB_MATCH_THRESHOLD_M)
@@ -144,17 +144,17 @@ def run_adsb_match(df_detections, df_adsb, params):
 
     print(f"\nMatch summary:")
     print(f"  Detections matched to ADS-B : {n_matched} / {n_det}")
-    print(f"  Detections unmatched        : {n_unmatched_det} / {n_det}")
+    #print(f"  Detections unmatched        : {n_unmatched_det} / {n_det}")
     print(f"  ADS-B unmatched             : {n_unmatched_adsb} / {n_adsb}")
 
     matched_dists = [
         r['match_distance_m'] for r in det_rows
         if r['match_distance_m'] is not None
     ]
-    if matched_dists:
-        print(f"  Match distance: "
-              f"mean: {np.mean(matched_dists):.0f}m  "
-              f"max: {np.max(matched_dists):.0f}m  "
-              f"min: {np.min(matched_dists):.0f}m")
+    #if matched_dists:
+        #print(f"  Match distance: "
+              #f"mean: {np.mean(matched_dists):.0f}m  "
+              #f"max: {np.max(matched_dists):.0f}m  "
+              #f"min: {np.min(matched_dists):.0f}m")
 
     return gdf
