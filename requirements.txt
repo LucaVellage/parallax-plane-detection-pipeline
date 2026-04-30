@@ -30,7 +30,8 @@ debugpy==1.8.20
 decorator==5.2.1
 defusedxml==0.7.1
 dotenv==0.9.9
-earthengine-api==1.7.18
+earthengine-api==1.7.24
+ee==0.2
 eerepr==0.1.2
 executing==2.2.1
 fasteners==0.20
