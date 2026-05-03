@@ -142,4 +142,4 @@ Open `notebooks/Pipeline_run.ipynb` for a step-by-step walkthrough of the full p
 Liu, Y., Xu, B., Zhi, W., Hu, C., Dong, Y., Jin, S., Lu, Y., Chen, T., Xu, W., Liu, Y., Zhao, B., & Lu, W. (2020). Space eye on flying aircraft: From Sentinel-2 MSI parallax to hybrid computing. Remote Sensing of Environment, 246, 111867. https://doi.org/10.1016/j.rse.2020.111867
 
 Historical ADS-B Data accessed via OpenSky Network: 
-Schafer, M., Strohmeier, M., Lenders, V., Martinovic, I., & Wilhelm, M. (2014). Bringing up OpenSky: A large-scale ADS-B sensor network for research. IPSN-14 Proceedings of the 13th International Symposium on Information Processing in Sensor Networks, 83–94. https://doi.org/10.1109/IPSN.2014. 6846743
+Schafer, M., Strohmeier, M., Lenders, V., Martinovic, I., & Wilhelm, M. (2014). Bringing up OpenSky: A large-scale ADS-B sensor network for research. IPSN-14 Proceedings of the 13th International Symposium on Information Processing in Sensor Networks, 83–94. https://doi.org/10.1109/IPSN.2014.6846743
