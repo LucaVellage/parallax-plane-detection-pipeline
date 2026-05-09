@@ -17,7 +17,7 @@ Step 4: Local      : Aircraft confirmation via inter-band displacement
 Step 5: Local      : ADS-B cross-reference and performance evaluation
 ```
 
-A full end-to-end demonstration is provided in `notebooks/Pipeline_run.ipynb`.
+A full end-to-end demonstration is provided in `notebooks/Pipeline_run.ipynb`. If the notebook does not render on GitHub, please view it in [NBViewer](https://nbviewer.org/github/LucaVellage/parallax-plane-detection-pipeline/blob/main/notebooks/Pipeline_run.ipynb).
 
 ---
 
